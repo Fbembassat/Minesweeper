@@ -77,6 +77,22 @@ export function revealTile(board, tile) {
     }
 }
 
+export function checkWin(board) {
+    return board.every(row => {
+        return row.every(tile => {
+            return tile.status === TILE_STATUSES.NUMBER || (tile.mine && (tile.status === TILE_STATUSES.HIDDEN || tile.status === TILE_STATUSES.MARKED))
+        })
+    }) 
+}
+
+export function checkLose(board) {
+    return board.some(row => {
+        return row.some(tile => {
+            return tile.status === TILE_STATUSES.MINE
+        })
+    })
+}
+
 // Fonction qui crée aléatoirement des mines 
 function getMinePositions(boardSize, numberOfMines) {
     const positions = []
