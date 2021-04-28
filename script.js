@@ -1,6 +1,6 @@
 // Affichage/UI
 
-import { TILE_STATUSES, createBoard, markTile } from './minesweeper.js'
+import { TILE_STATUSES, createBoard, markTile, revealTile } from './minesweeper.js'
 
 const BOARD_SIZE = 10
 const NUMBER_OF_MINES = 10
@@ -17,7 +17,7 @@ board.forEach(row => {
         boardElement.append(tile.element)
         // Evenement pour le click gauche ( révele la tuile )
         tile.element.addEventListener('click', () => {
-
+            revealTile(board, tile)
         })
         // Evenement pour le click droit ( marque la tuile )
         tile.element.addEventListener('contextmenu', e => {
@@ -43,7 +43,7 @@ function listMinesLeft() {
 
 // 1. Remplir le tableau avec des tuiles/mines = V
 // 2. Click gauche sur les tuiles = V
-    // a. Dévoiler les tuiles
+    // a. Dévoiler les tuiles = V
 // 3. Click droit sur les tuiles = V
     // a. Marquer les tuiles = V
 // 4. Vérifier quand on gagne/perd
