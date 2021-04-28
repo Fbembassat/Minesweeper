@@ -1,7 +1,7 @@
 // La logique
 
 // Le status des différentes tuiles
-const TILE_STATUSES = {
+export const TILE_STATUSES = {
     HIDDEN: 'hidden',
     MINE: 'mine',
     NUMBER: 'number',
@@ -11,7 +11,6 @@ const TILE_STATUSES = {
 export function createBoard(boardSize, numberOfMines) {
     const board = []
     const minePositions = getMinePositions(boardSize, numberOfMines)
-    console.log(minePositions)
 
     // parcourir le tableau dans la direction x et y pour créer une grille de jeu démineur
     for (let x = 0; x < boardSize; x++) {
@@ -42,6 +41,18 @@ export function createBoard(boardSize, numberOfMines) {
     }
 
     return board
+}
+// Fonction qui permet de marquer une tuile si c'est possible
+export function markTile(tile) {
+    if (tile.status !== TILE_STATUSES.HIDDEN && tile.status !== TILE_STATUSES.MARKED) {
+        return
+    }
+
+    if (tile.status === TILE_STATUSES.MARKED) {
+        tile.status = TILE_STATUSES.HIDDEN
+    } else {
+        tile.status = TILE_STATUSES.MARKED
+    }
 }
 
 // Fonction qui crée aléatoirement des mines 
